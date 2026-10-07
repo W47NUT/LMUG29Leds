@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 jobs:
   release:
@@ -52,6 +54,11 @@ jobs:
           $hash = (Get-FileHash $file -Algorithm SHA256).Hash.ToLowerInvariant()
           "$hash  LMUG29Leds.exe" | Set-Content "artifacts/win-x64/LMUG29Leds.exe.sha256" -Encoding ascii
           Get-Content "artifacts/win-x64/LMUG29Leds.exe.sha256"
+
+      - name: Attest release provenance
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be
+        with:
+          subject-path: artifacts/win-x64/LMUG29Leds.exe
 
       - name: Create GitHub release
         shell: pwsh
