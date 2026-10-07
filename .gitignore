@@ -1,5 +1,11 @@
 bin/
 obj/
+artifacts/
 .vs/
+.idea/
+.vscode/
 *.user
 *.suo
+*.pfx
+*.p12
+*.snk
