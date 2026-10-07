@@ -1,0 +1,17 @@
+C:\Users\Enus\source\LMUG29Leds\bin\Debug\net8.0\LMUG29Leds.exe
+C:\Users\Enus\source\LMUG29Leds\bin\Debug\net8.0\LMUG29Leds.deps.json
+C:\Users\Enus\source\LMUG29Leds\bin\Debug\net8.0\LMUG29Leds.runtimeconfig.json
+C:\Users\Enus\source\LMUG29Leds\bin\Debug\net8.0\LMUG29Leds.dll
+C:\Users\Enus\source\LMUG29Leds\bin\Debug\net8.0\LMUG29Leds.pdb
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\LMUG29Leds.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\LMUG29Leds.AssemblyInfoInputs.cache
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\LMUG29Leds.AssemblyInfo.cs
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\LMUG29Leds.csproj.CoreCompileInputs.cache
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\LMUG29Leds.dll
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\refint\LMUG29Leds.dll
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\LMUG29Leds.pdb
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\LMUG29Leds.genruntimeconfig.cache
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\ref\LMUG29Leds.dll
+C:\Users\Enus\source\LMUG29Leds\bin\Debug\net8.0\HidSharp.dll
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\LMUG29Leds.csproj.AssemblyReference.cache
+C:\Users\Enus\source\LMUG29Leds\obj\Debug\net8.0\LMUG29Leds.csproj.Up2Date

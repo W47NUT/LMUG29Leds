@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "e8xWJRxQddY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Enus\\source\\LMUG29Leds\\LMUG29Leds.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Enus\\.nuget\\packages\\hidsharp\\2.6.4\\hidsharp.2.6.4.nupkg.sha512"
+  ],
+  "logs": []
+}
