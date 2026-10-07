@@ -1,36 +1,28 @@
 # LMUG29Leds
 
-Restores the Logitech G29's built-in RPM LEDs in **Le Mans Ultimate**, including when using **lmuFFB** in Exclusive mode.
+LMUG29Leds restores the Logitech G29's built-in RPM LEDs in **Le Mans Ultimate**, including when using **lmuFFB** in Exclusive mode.
 
-## Why?
+It is a small, local-only Windows utility: LMU provides telemetry, lmuFFB can continue handling force feedback, and LMUG29Leds controls only the five LEDs on the G29.
 
-Le Mans Ultimate normally controls the G29's RPM LEDs itself.
+## Features
 
-When using lmuFFB in Exclusive mode, force feedback works, but the G29's RPM LEDs no longer receive their normal updates.
+- Native Windows desktop UI
+- Live LMU / G29 connection status
+- Live RPM and throttle display
+- Progressive RPM / shift lights
+- Automatic scaling from the car's reported maximum RPM
+- Pit-limiter scanner animation
+- Flashing near-redline shift warning
+- Physical `Test on wheel` previews for each light pattern
+- Automatic reconnect for LMU and the wheel
+- LEDs are switched off on exit
+- Works alongside lmuFFB
 
-LMUG29Leds works around that by reading LMU's shared-memory telemetry and controlling the G29 LEDs directly through USB HID.
+## Light behavior
 
-This allows:
+### RPM / Shift
 
-- **lmuFFB** to handle force feedback
-- **LMUG29Leds** to handle the wheel LEDs
-
-at the same time.
-
-## Current Features
-
-- Live RPM / shift LEDs
-- Automatically scales using the car's reported maximum RPM
-- Works while lmuFFB is running
-- Pit limiter scanner animation
-- Startup LED sweep
-- Flashing shift warning near maximum RPM
-- Automatically turns LEDs off when the program exits
-- Reads the player's vehicle directly from LMU telemetry
-
-### Normal RPM display
-
-The five LEDs progressively illuminate as engine RPM increases.
+During normal driving, the five LEDs progressively illuminate as RPM rises.
 
 ```text
 ○○○○○
@@ -41,9 +33,9 @@ The five LEDs progressively illuminate as engine RPM increases.
 ●●●●●
 ```
 
-### Pit limiter
+### Pit Limiter
 
-When the pit limiter is active, the RPM display is temporarily replaced by a scanner animation:
+While the pit limiter is active, a scanner pattern temporarily replaces the normal RPM display.
 
 ```text
 ●○○○○
@@ -56,99 +48,96 @@ When the pit limiter is active, the RPM display is temporarily replaced by a sca
 ○●○○○
 ```
 
-When the limiter is switched off, normal RPM LEDs immediately resume.
+When the limiter is disabled, normal RPM behavior immediately resumes.
+
+### Shift Warning
+
+At the final shift-warning range, all five LEDs flash.
 
 ## Requirements
 
-- Windows
+- Windows 10/11 x64
 - Le Mans Ultimate
 - Logitech G29
 - LMU shared-memory plugins enabled
-- .NET 8
 
-lmuFFB is **not required**, but solving the loss of G29 LEDs while using lmuFFB is the primary reason this project exists.
+lmuFFB is **not required**, but restoring the G29 LEDs while using lmuFFB is the reason this project exists.
 
-## LMU Setup
+## LMU setup
 
-In Le Mans Ultimate, make sure:
+In Le Mans Ultimate, enable:
 
 ```text
 Settings -> Gameplay -> Enable Plugins
 ```
 
-is enabled.
+LMUG29Leds reads the `LMU_Data` shared-memory mapping.
 
-LMUG29Leds connects to LMU's:
+## Download
 
-```text
-LMU_Data
-```
+Use the latest GitHub Release and download:
 
-shared-memory mapping.
+- `LMUG29Leds.exe`
+- `LMUG29Leds.exe.sha256` if you want to verify the release checksum
 
-## Running From Source
+The release executable is self-contained and does not require the .NET SDK.
 
-Clone the repository:
+> The executable is currently unsigned. Windows SmartScreen may warn about a new or low-reputation executable. Releases are built publicly by GitHub Actions and include a SHA-256 checksum.
+
+## Security / privacy
+
+LMUG29Leds is intentionally narrow in scope.
+
+It:
+
+- runs as the current user and does **not** request administrator privileges;
+- does **not** use the network;
+- does **not** contain an updater, downloader, analytics, or app telemetry;
+- does **not** install a service or driver;
+- opens LMU shared memory read-only;
+- targets only Logitech VID `0x046D` / G29 PID `0xC24F`;
+- constrains HID output to the five G29 LED bits;
+- validates shared-memory bounds and telemetry values before use.
+
+See [SECURITY.md](SECURITY.md) for the security policy.
+
+## Building from source
+
+Install the .NET 8 SDK, then:
 
 ```powershell
 git clone https://github.com/W47NUT/LMUG29Leds.git
 cd LMUG29Leds
-```
-
-Restore dependencies:
-
-```powershell
 dotnet restore
-```
-
-Run:
-
-```powershell
 dotnet run
 ```
 
-You should see:
+To create a self-contained executable locally:
 
-```text
-G29 LED interface found
-Connected to LMU
-G29 LEDs ACTIVE
+```powershell
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=false
 ```
-
-Enter a session in LMU and the LEDs should respond to engine RPM.
-
-Press `Ctrl+C` to exit.
 
 ## Hardware
 
-Currently tested with:
+Currently tested:
 
 - Logitech G29
 
-G923 support may be added later, but is not currently tested or claimed.
+Other Logitech wheels are not claimed as supported until they are explicitly implemented and tested.
 
-## Status
+## Dependency
 
-LMUG29Leds is currently an early working prototype.
+The application intentionally has one NuGet dependency:
 
-The LMU telemetry layout used by the application has been verified against the current game build, but future LMU updates could require changes.
+- HidSharp 2.6.4
 
-Planned improvements include:
-
-- Standalone Windows executable
-- Configuration file
-- Configurable RPM thresholds
-- Configurable LED animations
-- Additional useful race/session indications
-- Improved device detection
-- Additional Logitech wheel support
+GitHub Dependabot, NuGet audit, compiler analyzers, and CodeQL are enabled for the repository.
 
 ## License
 
-License information will be added before the first packaged release.
+MIT. See [LICENSE](LICENSE).
 
 ## Disclaimer
 
-This is an unofficial community project.
-
-It is not affiliated with Studio 397, Motorsport Games, Logitech, or lmuFFB.
+This is an unofficial community project and is not affiliated with Studio 397, Motorsport Games, Logitech, or lmuFFB.
