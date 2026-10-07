@@ -4,8 +4,9 @@ using System.Windows.Media;
 
 namespace LMUG29Leds;
 
-public partial class MainWindow : Window
+public partial class MainWindow : Window, IDisposable
 {
+    private bool _disposed;
     private static readonly Color Green = Color.FromRgb(63, 185, 80);
     private static readonly Color Amber = Color.FromRgb(210, 153, 34);
     private static readonly Color Red = Color.FromRgb(248, 81, 73);
@@ -302,9 +303,22 @@ public partial class MainWindow : Window
 
     private void MainWindow_Closed(object? sender, EventArgs e)
     {
+        Dispose();
+    }
+
+    public void Dispose()
+    {
+        if (_disposed)
+        {
+            return;
+        }
+
+        _disposed = true;
         _shutdown.Cancel();
         _wheel.Dispose();
         _lmu.Dispose();
         _shutdown.Dispose();
+
+        GC.SuppressFinalize(this);
     }
 }
