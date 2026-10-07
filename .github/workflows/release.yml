@@ -67,7 +67,7 @@ jobs:
       - name: Restore with NuGet audit
         if: steps.existing.outputs.exists != 'true'
         shell: pwsh
-        run: dotnet restore LMUG29Leds.csproj -p:NuGetAudit=true -p:NuGetAuditMode=all
+        run: dotnet restore LMUG29Leds.csproj -r win-x64 -p:NuGetAudit=true -p:NuGetAuditMode=all
 
       - name: Build with analyzers
         if: steps.existing.outputs.exists != 'true'
